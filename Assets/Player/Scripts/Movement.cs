@@ -18,6 +18,7 @@ public class Movement : MonoBehaviour
     [SerializeField] LayerMask groundMask;
 
 
+
     void Awake()
     {
         pc = new PlayerControl();
