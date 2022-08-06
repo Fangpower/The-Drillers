@@ -10,6 +10,7 @@ public class Generator : MonoBehaviour
     [SerializeField] float[] oreChance;
     [SerializeField] GameObject[] ground;
     [SerializeField] GameObject[] ore;
+    [SerializeField] GameObject[] rareOre;
     public bool[] tunnel;
     [SerializeField] GameObject tunnelObj;
     [SerializeField] GameObject permaGround;
@@ -28,7 +29,10 @@ public class Generator : MonoBehaviour
                     layer++;
                 }
                 if(tunnel[layer]){
-                    if(Random.Range(0, 100) < oreChance[layer] && x != 12){
+                    if(Random.Range(0, 100) < 2 && x != 12){
+                        var tempFG = Instantiate(rareOre[layer], transform.position + new Vector3(x, y, 0), Quaternion.identity);
+                        tempFG.transform.SetParent(transform);
+                    } else if(Random.Range(0, 100) < oreChance[layer] && x != 12){
                         var tempFG = Instantiate(ore[layer], transform.position + new Vector3(x, y, 0), Quaternion.identity);
                         tempFG.transform.SetParent(transform);
                     } else if(x != 12) {
@@ -39,7 +43,10 @@ public class Generator : MonoBehaviour
                         tempBG.transform.SetParent(transform);
                     }
                 } else {
-                    if(Random.Range(0, 100) < oreChance[layer]){
+                    if(Random.Range(0, 100) < 2){
+                        var tempFG = Instantiate(rareOre[layer], transform.position + new Vector3(x, y, 0), Quaternion.identity);
+                        tempFG.transform.SetParent(transform);
+                    } else if(Random.Range(0, 100) < oreChance[layer]){
                         var tempFG = Instantiate(ore[layer], transform.position + new Vector3(x, y, 0), Quaternion.identity);
                         tempFG.transform.SetParent(transform);
                     } else {

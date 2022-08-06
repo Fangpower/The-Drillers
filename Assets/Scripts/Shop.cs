@@ -15,10 +15,19 @@ public class Shop : MonoBehaviour
     [SerializeField] Image coinImg;
     [SerializeField] ParticleSystem[] parts;
     [SerializeField] ParticleSystem cashPart;
+    [SerializeField] TMP_Text fpsText;
+
+    float deltaTime;
 
     private void Start(){
         gen = FindObjectOfType<Generator>();
         ad = GetComponent<AudioSource>();
+    }
+
+    private void Update(){
+        deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
+        float fps = 1.0f / deltaTime;
+        fpsText.text = Mathf.Ceil(fps).ToString() + "FPS";
     }
 
     void OnTriggerEnter2D(Collider2D col){

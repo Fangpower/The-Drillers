@@ -11,6 +11,7 @@ public class Block : MonoBehaviour
     [SerializeField] float maxHealth;
     [SerializeField] ParticleSystem brokenParts;
     [SerializeField] LayerMask groundMask;
+    [SerializeField] bool rareOre;
 
     private float health;
     private int current;
@@ -32,6 +33,8 @@ public class Block : MonoBehaviour
             case "Diamond": text = GameObject.Find("DiamondText").GetComponent<TMP_Text>(); visual = GameObject.Find("DiamondImg").GetComponent<Image>(); break;
             case "Uranium": text = GameObject.Find("UraniumText").GetComponent<TMP_Text>(); visual = GameObject.Find("UraniumImg").GetComponent<Image>(); break;
             case "Amathyst": text = GameObject.Find("AmathystText").GetComponent<TMP_Text>(); visual = GameObject.Find("AmathystImg").GetComponent<Image>(); break;
+            case "Black": text = GameObject.Find("BlackText").GetComponent<TMP_Text>(); visual = GameObject.Find("BlackImg").GetComponent<Image>(); break;
+            case "White": text = GameObject.Find("WhiteText").GetComponent<TMP_Text>(); visual = GameObject.Find("WhiteImg").GetComponent<Image>(); break;
         }
     }
 
@@ -51,7 +54,8 @@ public class Block : MonoBehaviour
             brokenParts.Play();
             if(text){
                 int.TryParse(text.text, out current);
-                current += Random.Range(2, 5);
+                if(rareOre) current += Random.Range(6, 10);
+                else current += Random.Range(2, 5);
                 text.text = current.ToString();
             }
             GameObject.Destroy(gameObject);
