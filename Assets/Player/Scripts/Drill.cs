@@ -16,6 +16,7 @@ public class Drill : MonoBehaviour
     [SerializeField] float damage = 1;
     [SerializeField] Transform[] arms;
     [SerializeField] AudioSource sound;
+    [SerializeField] GameObject uiOne, uiTwo;
     
     public float fuelLevel;
     public float damageLevel;
@@ -24,6 +25,8 @@ public class Drill : MonoBehaviour
 
     void Awake()
     {
+        uiOne = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
+        uiTwo = GameObject.Find("Canvas").transform.GetChild(1).gameObject;
         pc = new PlayerControl();
         cam = GameObject.Find("Main Camera").GetComponent<Camera>();
         anim = GetComponent<Animator>();
@@ -43,8 +46,8 @@ public class Drill : MonoBehaviour
     }
 
     void Update(){
-        maxFuel = 1000 + (fuelLevel * 5);
-        damage = 100 + (damageLevel/2);
+        maxFuel = 10 + (fuelLevel * 5);
+        damage = 1 + (damageLevel/2);
         //Drill rotation
         Vector2 mouseRaw = pc.Controls.Mouse.ReadValue<Vector2>();
         Vector2 mouse = cam.ScreenToWorldPoint(new Vector2(mouseRaw.x, mouseRaw.y));
@@ -56,7 +59,7 @@ public class Drill : MonoBehaviour
         
         fuelFill.fillAmount = fuel/maxFuel;
 
-        if(pc.Controls.Mine.ReadValue<float>() == 1 && fuel > 0){
+        if(pc.Controls.Mine.ReadValue<float>() == 1 && fuel > 0 && !uiOne.activeSelf && !uiTwo.activeSelf){
             anim.SetBool("Use", true);
             if(!sound.isPlaying){
                 sound.Play();

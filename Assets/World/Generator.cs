@@ -16,6 +16,7 @@ public class Generator : MonoBehaviour
     [SerializeField] GameObject permaGround;
 
     private void Start(){
+        Application.targetFrameRate = 300;
         Creator();
     }
 
@@ -30,28 +31,22 @@ public class Generator : MonoBehaviour
                 }
                 if(tunnel[layer]){
                     if(Random.Range(0, 100) < 2 && x != 12){
-                        var tempFG = Instantiate(rareOre[layer], transform.position + new Vector3(x, y, 0), Quaternion.identity);
-                        tempFG.transform.SetParent(transform);
+                        Maker(rareOre, layer, x, y);
                     } else if(Random.Range(0, 100) < oreChance[layer] && x != 12){
-                        var tempFG = Instantiate(ore[layer], transform.position + new Vector3(x, y, 0), Quaternion.identity);
-                        tempFG.transform.SetParent(transform);
+                        Maker(ore, layer, x, y);
                     } else if(x != 12) {
-                        var tempFG = Instantiate(ground[layer], transform.position + new Vector3(x, y, 0), Quaternion.identity);
-                        tempFG.transform.SetParent(transform);
+                        Maker(ground, layer, x, y);
                     } else {
-                        var tempBG = Instantiate(tunnelObj, transform.position + new Vector3(x, y, 0), Quaternion.identity);
-                        tempBG.transform.SetParent(transform);
+                        var tempFG = Instantiate(tunnelObj, transform.position + new Vector3(x, y, 0), Quaternion.identity);
+                        tempFG.transform.SetParent(transform);
                     }
                 } else {
                     if(Random.Range(0, 100) < 2){
-                        var tempFG = Instantiate(rareOre[layer], transform.position + new Vector3(x, y, 0), Quaternion.identity);
-                        tempFG.transform.SetParent(transform);
+                        Maker(rareOre, layer, x, y);
                     } else if(Random.Range(0, 100) < oreChance[layer]){
-                        var tempFG = Instantiate(ore[layer], transform.position + new Vector3(x, y, 0), Quaternion.identity);
-                        tempFG.transform.SetParent(transform);
+                        Maker(ore, layer, x, y);
                     } else {
-                        var tempFG = Instantiate(ground[layer], transform.position + new Vector3(x, y, 0), Quaternion.identity);
-                        tempFG.transform.SetParent(transform);
+                        Maker(ground, layer, x, y);
                     }
                 }
                 
@@ -59,11 +54,16 @@ public class Generator : MonoBehaviour
         }
 
         for(int x = 0; x < width; x += 2){
-            for(float y = -height; y > -height - 6; y -= 2){
+            for(int y = (int)-height; y > -height - 6; y -= 2){
                 var tempFG = Instantiate(permaGround, transform.position + new Vector3(x, y, 0), Quaternion.identity);
                 tempFG.transform.SetParent(transform);
             }
         }
+    }
+
+    private void Maker(GameObject[] obj, int layer, int x, int y){
+        var tempFG = Instantiate(obj[layer], transform.position + new Vector3(x, y, 0), Quaternion.identity);
+        tempFG.transform.SetParent(transform);
     }
 
     public void Destroyer(){

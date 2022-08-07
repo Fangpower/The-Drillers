@@ -255,6 +255,8 @@ MonoBehaviour:
   - {fileID: 6396920998037720441}
   - {fileID: 6396920997750659448}
   sound: {fileID: 6396920997735853466}
+  uiOne: {fileID: 0}
+  uiTwo: {fileID: 0}
   fuelLevel: 0
   damageLevel: 0
 --- !u!61 &6396920997735853469

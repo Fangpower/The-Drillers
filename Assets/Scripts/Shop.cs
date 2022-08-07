@@ -8,6 +8,7 @@ public class Shop : MonoBehaviour
 {
     private Generator gen;
     private AudioSource ad;
+    private Movement mm;
 
     [SerializeField] int[] prices;
     [SerializeField] TMP_Text[] resources;
@@ -32,6 +33,7 @@ public class Shop : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col){
         if(col.CompareTag("Player")){
+            mm = col.transform.GetComponent<Movement>();
             StartCoroutine("Sell");
             gen.Destroyer();
         }
@@ -41,6 +43,7 @@ public class Shop : MonoBehaviour
         if(money.text == ""){
             coinImg.color = new Color32(255, 255, 255, 255);
         }
+        mm.enabled = false;
         cashPart.Play();
         FindObjectOfType<Drill>().Refill();
         ad.Play();
@@ -68,6 +71,7 @@ public class Shop : MonoBehaviour
             cash += resource;
             money.text = cash.ToString();
         }
+        mm.enabled = true;
         cashPart.Stop();
         ad.Stop();
         yield return null;
