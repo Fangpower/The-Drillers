@@ -14,7 +14,9 @@ public class Anvil : MonoBehaviour
     [SerializeField] int[] levels;
     [SerializeField] TMP_Text[] levelT;
     [SerializeField] TMP_Text[] costT;
+    [SerializeField] float[] maxLevel;
     [SerializeField] TMP_Text money;
+    [SerializeField] float costIncrease = 1.5f;
 
 
     void Start(){
@@ -44,16 +46,19 @@ public class Anvil : MonoBehaviour
     }
 
     public void Upgrade(int num){
-        if(moneyAmt >= costs[num]){
+        if(moneyAmt >= costs[num] && levels[num] < maxLevel[num]){
             moneyAmt -= costs[num];
             money.text = moneyAmt.ToString();
 
-            costs[num] = (int)(costs[num] * 1.5f);
+            costs[num] = (int)(costs[num] * costIncrease);
             levels[num] += 1;
             levelT[num].text = levels[num].ToString();
-            costT[num].text = costs[num].ToString() + "$";
+            costT[num].text = costs[num].ToString() + "$";  
 
-            
+            if(levels[num] == maxLevel[num]){
+                levelT[num].text = "Max";
+                costT[num].text = "Max";
+            }          
         }
     }
 

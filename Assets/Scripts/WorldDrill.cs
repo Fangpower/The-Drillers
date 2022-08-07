@@ -58,6 +58,7 @@ public class WorldDrill : MonoBehaviour
             
             if(current == max){
                 levelT.text = "Max";
+                costT.text = "Max";
             }
         }
     }
@@ -75,6 +76,7 @@ public class WorldDrill : MonoBehaviour
             gemIcon.sprite = gems[levelCurrent-1];
             if(levelCurrent == max){
                 levelLevelT.text = "Max";
+                costLevelT.text = "Max";
             }
         }
     }

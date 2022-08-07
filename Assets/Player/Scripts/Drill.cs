@@ -46,8 +46,8 @@ public class Drill : MonoBehaviour
     }
 
     void Update(){
-        maxFuel = 10 + (fuelLevel * 5);
-        damage = 1 + (damageLevel/2);
+        maxFuel = 10 + (fuelLevel * 10);
+        damage = 1 + (damageLevel/1.5f);
         //Drill rotation
         Vector2 mouseRaw = pc.Controls.Mouse.ReadValue<Vector2>();
         Vector2 mouse = cam.ScreenToWorldPoint(new Vector2(mouseRaw.x, mouseRaw.y));

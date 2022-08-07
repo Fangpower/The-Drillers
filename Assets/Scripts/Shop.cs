@@ -63,7 +63,7 @@ public class Shop : MonoBehaviour
                 ves += prices[i];
                 resources[i].text = vis.ToString();
                 money.text = ves.ToString();
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.025f);
             }
             parts[i].Stop();
 

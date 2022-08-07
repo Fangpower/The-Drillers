@@ -412,7 +412,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
-  id: 7
+  rareOre: 0
 --- !u!61 &1068668076070149792
 BoxCollider2D:
   m_ObjectHideFlags: 0
