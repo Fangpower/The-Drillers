@@ -249,7 +249,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bc: {fileID: 6396920997735853469}
   fuelFill: {fileID: 0}
-  maxFuel: 10
+  maxFuel: 1000
   damage: 1
   arms:
   - {fileID: 6396920998037720441}

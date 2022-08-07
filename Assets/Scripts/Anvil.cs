@@ -8,6 +8,7 @@ public class Anvil : MonoBehaviour
     private Movement mm;
     private Drill d;
     private int moneyAmt;
+    private bool instructed;
 
     [SerializeField] GameObject store;
     [SerializeField] int[] costs;
@@ -17,6 +18,8 @@ public class Anvil : MonoBehaviour
     [SerializeField] float[] maxLevel;
     [SerializeField] TMP_Text money;
     [SerializeField] float costIncrease = 1.5f;
+
+    public GameObject[] instruct;
 
 
     void Start(){
@@ -35,6 +38,10 @@ public class Anvil : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col){
         if(col.CompareTag("Player")){
             store.SetActive(true);
+            if(!instructed){
+                instruct[3].SetActive(false);
+                instructed = true;
+            }
         }
     }
 

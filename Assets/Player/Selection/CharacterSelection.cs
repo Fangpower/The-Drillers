@@ -9,16 +9,26 @@ public class CharacterSelection : MonoBehaviour
     [SerializeField] Anvil anvil;
     [SerializeField] GameObject fuelUI;
     [SerializeField] CameraController[] cc;
+    [SerializeField] GameObject instruct;
+    [SerializeField] GameObject[] instructions;
     
     public void Chosen(int num){
         var temp = Instantiate(players[num], new Vector3(0, 0, 0), Quaternion.identity);
         Movement mm = temp.GetComponent<Movement>();
         Drill d = temp.transform.GetChild(0).GetComponent<Drill>();
+        Shop s = FindObjectOfType<Shop>();
+        Anvil a = FindObjectOfType<Anvil>();
         cc[0].player = temp.transform;
         //cc[1].player = temp.transform;
         anvil.SetVariables(mm, d);
         
         fuelUI.SetActive(true);
+        instruct.SetActive(true);
+
+        mm.instruct = instructions;
+        d.instruct = instructions;
+        s.instruct = instructions;
+        a.instruct = instructions;
     }
 
     public void OnClick(int num){

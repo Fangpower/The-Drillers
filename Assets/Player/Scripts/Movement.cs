@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer sr;
     private Animator anim;
+    private bool instructDone;
 
     public float speedLevel;
 
@@ -16,6 +17,7 @@ public class Movement : MonoBehaviour
     [SerializeField] Transform drill;
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask groundMask;
+    public GameObject[] instruct;
 
     void Awake()
     {
@@ -48,5 +50,11 @@ public class Movement : MonoBehaviour
         if(lr != 0){sr.flipX = lr > 0 ? true : false;}
 
         anim.SetBool("Flying", !(Physics2D.OverlapCircle(groundCheck.position, 0.25f, groundMask)));
+
+        if(!instructDone && (lr != 0 || ws != 0)){
+            instruct[0].SetActive(false);
+            instruct[1].SetActive(true);
+            instructDone = true;
+        }
     }
 }

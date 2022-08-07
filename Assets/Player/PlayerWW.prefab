@@ -134,12 +134,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bc: {fileID: 2853380303052271656}
   fuelFill: {fileID: 0}
-  maxFuel: 10
+  maxFuel: 1000
   damage: 1
   arms:
   - {fileID: 2853380303421444300}
   - {fileID: 2853380303075198157}
   sound: {fileID: 2853380303052271663}
+  uiOne: {fileID: 0}
+  uiTwo: {fileID: 0}
   fuelLevel: 0
   damageLevel: 0
 --- !u!61 &2853380303052271656

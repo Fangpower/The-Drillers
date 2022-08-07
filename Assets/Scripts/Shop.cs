@@ -9,6 +9,7 @@ public class Shop : MonoBehaviour
     private Generator gen;
     private AudioSource ad;
     private Movement mm;
+    private bool instructed;
 
     [SerializeField] int[] prices;
     [SerializeField] TMP_Text[] resources;
@@ -17,6 +18,8 @@ public class Shop : MonoBehaviour
     [SerializeField] ParticleSystem[] parts;
     [SerializeField] ParticleSystem cashPart;
     [SerializeField] TMP_Text fpsText;
+
+    public GameObject[] instruct;
 
     float deltaTime;
 
@@ -40,6 +43,11 @@ public class Shop : MonoBehaviour
     }
 
     private IEnumerator Sell(){
+        if(!instructed){
+            instruct[2].SetActive(false);
+            instruct[3].SetActive(true);
+            instructed = true;
+        }
         if(money.text == ""){
             coinImg.color = new Color32(255, 255, 255, 255);
         }

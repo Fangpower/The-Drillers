@@ -9,6 +9,7 @@ public class Drill : MonoBehaviour
     private Camera cam;
     private Animator anim;
     private float fuel;
+    private bool instructed;
 
     [SerializeField] BoxCollider2D bc;
     [SerializeField] Image fuelFill;
@@ -17,6 +18,7 @@ public class Drill : MonoBehaviour
     [SerializeField] Transform[] arms;
     [SerializeField] AudioSource sound;
     [SerializeField] GameObject uiOne, uiTwo;
+    public GameObject[] instruct;
     
     public float fuelLevel;
     public float damageLevel;
@@ -30,7 +32,7 @@ public class Drill : MonoBehaviour
         pc = new PlayerControl();
         cam = GameObject.Find("Main Camera").GetComponent<Camera>();
         anim = GetComponent<Animator>();
-        fuel = maxFuel; 
+        fuel = maxFuel;
     }
 
     private void OnEnable(){
@@ -46,8 +48,8 @@ public class Drill : MonoBehaviour
     }
 
     void Update(){
-        maxFuel = 10 + (fuelLevel * 10);
-        damage = 1 + (damageLevel/1.5f);
+        maxFuel = 10 + (fuelLevel * 5f);
+        damage = 1 + (damageLevel/2f);
         //Drill rotation
         Vector2 mouseRaw = pc.Controls.Mouse.ReadValue<Vector2>();
         Vector2 mouse = cam.ScreenToWorldPoint(new Vector2(mouseRaw.x, mouseRaw.y));
@@ -63,6 +65,11 @@ public class Drill : MonoBehaviour
             anim.SetBool("Use", true);
             if(!sound.isPlaying){
                 sound.Play();
+            }
+            if(!instructed){
+                instruct[1].SetActive(false);
+                instruct[2].SetActive(true);
+                instructed = true;
             }
             
         } else {
