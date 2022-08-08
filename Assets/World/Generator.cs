@@ -14,6 +14,7 @@ public class Generator : MonoBehaviour
     public bool[] tunnel;
     [SerializeField] GameObject tunnelObj;
     [SerializeField] GameObject permaGround;
+    [SerializeField] GameObject bomb;
 
     private void Start(){
         Application.targetFrameRate = 300;
@@ -30,18 +31,24 @@ public class Generator : MonoBehaviour
                     layer++;
                 }
                 if(tunnel[layer]){
-                    if(Random.Range(0, 100) < 2 && x != 12){
+                    if(Random.Range(0, 100) < 2f && x != 12 && layer != 0){
+                        var temp = Instantiate(bomb, transform.position + new Vector3(x, y, 0), Quaternion.identity);
+                        temp.transform.SetParent(transform);
+                    } else if(Random.Range(0, 100) < 2 && x != 12){
                         Maker(rareOre, layer, x, y);
                     } else if(Random.Range(0, 100) < oreChance[layer] && x != 12){
                         Maker(ore, layer, x, y);
                     } else if(x != 12) {
                         Maker(ground, layer, x, y);
                     } else {
-                        var tempFG = Instantiate(tunnelObj, transform.position + new Vector3(x, y, 0), Quaternion.identity);
-                        tempFG.transform.SetParent(transform);
+                        var temp = Instantiate(tunnelObj, transform.position + new Vector3(x, y, 0), Quaternion.identity);
+                        temp.transform.SetParent(transform);
                     }
                 } else {
-                    if(Random.Range(0, 100) < 2){
+                    if(Random.Range(0, 100) < 2f && layer != 0){
+                        var temp = Instantiate(bomb, transform.position + new Vector3(x, y, 0), Quaternion.identity);
+                        temp.transform.SetParent(transform);
+                    } else if(Random.Range(0, 100) < 2){
                         Maker(rareOre, layer, x, y);
                     } else if(Random.Range(0, 100) < oreChance[layer]){
                         Maker(ore, layer, x, y);
@@ -55,15 +62,15 @@ public class Generator : MonoBehaviour
 
         for(int x = 0; x < width; x += 2){
             for(int y = (int)-height; y > -height - 6; y -= 2){
-                var tempFG = Instantiate(permaGround, transform.position + new Vector3(x, y, 0), Quaternion.identity);
-                tempFG.transform.SetParent(transform);
+                var temp = Instantiate(permaGround, transform.position + new Vector3(x, y, 0), Quaternion.identity);
+                temp.transform.SetParent(transform);
             }
         }
     }
 
     private void Maker(GameObject[] obj, int layer, int x, int y){
-        var tempFG = Instantiate(obj[layer], transform.position + new Vector3(x, y, 0), Quaternion.identity);
-        tempFG.transform.SetParent(transform);
+        var temp = Instantiate(obj[layer], transform.position + new Vector3(x, y, 0), Quaternion.identity);
+        temp.transform.SetParent(transform);
     }
 
     public void Destroyer(){

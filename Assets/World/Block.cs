@@ -12,8 +12,9 @@ public class Block : MonoBehaviour
     [SerializeField] ParticleSystem brokenParts;
     [SerializeField] LayerMask groundMask;
     [SerializeField] bool rareOre;
+    [SerializeField] bool bomb;
 
-    private float health;
+    public float health;
     private int current;
     private TMP_Text text;
     private Image visual;
@@ -57,6 +58,13 @@ public class Block : MonoBehaviour
                 if(rareOre) current += Random.Range(6, 10);
                 else current += Random.Range(2, 5);
                 text.text = current.ToString();
+            }
+            if(bomb){
+                Collider2D[] surrounding = Physics2D.OverlapCircleAll(transform.position, 1.1f, groundMask);
+                foreach(Collider2D coll in surrounding){
+                    coll.GetComponent<Block>().health = 0;
+                }
+                FindObjectOfType<Drill>().fuel /= 2;
             }
             GameObject.Destroy(gameObject);
         }

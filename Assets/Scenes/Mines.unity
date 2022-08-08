@@ -8401,6 +8401,7 @@ MonoBehaviour:
   tunnel: 0000000000000000
   tunnelObj: {fileID: 8301905393219839318, guid: 7f91dff4c8db947439e20954a64e0630, type: 3}
   permaGround: {fileID: 5333432254497328764, guid: 20fb933048818f6489c682c1f9d8886f, type: 3}
+  bomb: {fileID: 5248255259215809669, guid: d77cf13cec8b0e744af24237cab27a0f, type: 3}
 --- !u!4 &510959472
 Transform:
   m_ObjectHideFlags: 0
@@ -8423,7 +8424,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 510959470}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0f7faee9debadfc46a7200f65559c4be, type: 3}
@@ -46450,7 +46451,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2031876844
 RectTransform:
   m_ObjectHideFlags: 0

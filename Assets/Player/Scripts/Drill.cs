@@ -8,7 +8,7 @@ public class Drill : MonoBehaviour
     private PlayerControl pc;
     private Camera cam;
     private Animator anim;
-    private float fuel;
+    public float fuel;
     private bool instructed;
 
     [SerializeField] BoxCollider2D bc;
@@ -61,17 +61,11 @@ public class Drill : MonoBehaviour
         
         fuelFill.fillAmount = fuel/maxFuel;
 
-        if(pc.Controls.Mine.ReadValue<float>() == 1 && fuel > 0 && !uiOne.activeSelf && !uiTwo.activeSelf){
+        if(pc.Controls.Mine.ReadValue<float>() == 1 && fuel > 0 && !uiOne.activeSelf && !uiTwo.activeSelf && !instruct[0].activeSelf){
             anim.SetBool("Use", true);
             if(!sound.isPlaying){
                 sound.Play();
             }
-            if(!instructed){
-                instruct[1].SetActive(false);
-                instruct[2].SetActive(true);
-                instructed = true;
-            }
-            
         } else {
             anim.SetBool("Use", false);
             sound.Stop();
@@ -83,6 +77,11 @@ public class Drill : MonoBehaviour
             col.GetComponent<Block>().Damage(damage);
             fuel -= 1 * Time.deltaTime;
             fuel = Mathf.Clamp(fuel, 0, maxFuel);
+            if(!instructed && col.transform.name == ("Copper")){
+                instruct[1].SetActive(false);
+                instruct[2].SetActive(true);
+                instructed = true;
+            }
         }
     }
 
