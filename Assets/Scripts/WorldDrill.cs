@@ -20,7 +20,10 @@ public class WorldDrill : MonoBehaviour
     [SerializeField] Image gemIcon;
     [SerializeField] int levelCost = 100;
     [SerializeField] int maxLevelCost;
-
+    
+    public GameObject[] instruct;
+    
+    private bool instructed;
     private int current = 0;
     private int levelCurrent = 1;
     private int cash;
@@ -36,6 +39,10 @@ public class WorldDrill : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col){
         if(col.CompareTag("Player")){
             store.SetActive(true);
+            if(!instructed && instruct[4].activeSelf){
+                instruct[4].SetActive(false);
+                instructed = true;
+            }
         }
     }
 

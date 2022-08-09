@@ -38,8 +38,9 @@ public class Anvil : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col){
         if(col.CompareTag("Player")){
             store.SetActive(true);
-            if(!instructed){
+            if(!instructed && instruct[3].activeSelf){
                 instruct[3].SetActive(false);
+                instruct[4].SetActive(true);
                 instructed = true;
             }
         }

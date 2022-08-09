@@ -35,23 +35,24 @@ public class Shop : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D col){
-        if(col.CompareTag("Player")){
+        if(col.CompareTag("Player") && !instruct[2].activeSelf){
             mm = col.transform.GetComponent<Movement>();
+            StartCoroutine("Sell");
+            gen.Destroyer();
+        } else if(col.CompareTag("Player") && !instructed){
+            instruct[2].SetActive(false);
+            instruct[3].SetActive(true);
+            instructed = true;
             StartCoroutine("Sell");
             gen.Destroyer();
         }
     }
 
     private IEnumerator Sell(){
-        if(!instructed){
-            instruct[2].SetActive(false);
-            instruct[3].SetActive(true);
-            instructed = true;
-        }
         if(money.text == ""){
             coinImg.color = new Color32(255, 255, 255, 255);
         }
-        mm.enabled = false;
+        //mm.enabled = false;
         cashPart.Play();
         FindObjectOfType<Drill>().Refill();
         ad.Play();
@@ -79,7 +80,7 @@ public class Shop : MonoBehaviour
             cash += resource;
             money.text = cash.ToString();
         }
-        mm.enabled = true;
+        //mm.enabled = true;
         cashPart.Stop();
         ad.Stop();
         yield return null;

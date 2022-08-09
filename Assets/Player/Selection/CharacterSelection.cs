@@ -18,6 +18,7 @@ public class CharacterSelection : MonoBehaviour
         Drill d = temp.transform.GetChild(0).GetComponent<Drill>();
         Shop s = FindObjectOfType<Shop>();
         Anvil a = FindObjectOfType<Anvil>();
+        WorldDrill wd = FindObjectOfType<WorldDrill>();
         cc[0].player = temp.transform;
         //cc[1].player = temp.transform;
         anvil.SetVariables(mm, d);
@@ -29,6 +30,7 @@ public class CharacterSelection : MonoBehaviour
         d.instruct = instructions;
         s.instruct = instructions;
         a.instruct = instructions;
+        wd.instruct = instructions;
     }
 
     public void OnClick(int num){
