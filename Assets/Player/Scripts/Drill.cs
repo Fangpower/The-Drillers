@@ -73,7 +73,7 @@ public class Drill : MonoBehaviour
     }
 
     void OnTriggerStay2D(Collider2D col){
-        if(pc.Controls.Mine.ReadValue<float>() == 1 && col.CompareTag("Breakable") && fuel > 0){
+        if(pc.Controls.Mine.ReadValue<float>() == 1 && col.CompareTag("Breakable") && fuel > 0 && !instruct[0].activeSelf){
             col.GetComponent<Block>().Damage(damage);
             fuel -= 1 * Time.deltaTime;
             fuel = Mathf.Clamp(fuel, 0, maxFuel);
